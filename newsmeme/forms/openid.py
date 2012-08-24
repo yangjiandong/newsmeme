@@ -1,4 +1,4 @@
-from flaskext.wtf import Form, HiddenField, TextField, RecaptchaField, \
+from flask.ext.wtf import Form, HiddenField, TextField, RecaptchaField, \
         SubmitField, ValidationError, required, email, url
 
 from flaskext.babel import lazy_gettext as _
@@ -8,17 +8,17 @@ from newsmeme.models import User
 from .validators import is_username
 
 class OpenIdSignupForm(Form):
-    
+
     next = HiddenField()
 
     username = TextField(_("Username"), validators=[
-                         required(_("Username required")), 
+                         required(_("Username required")),
                          is_username])
-    
+
     email = TextField(_("Email address"), validators=[
-                      required(message=_("Email address required")), 
+                      required(message=_("Email address required")),
                       email(message=_("Valid email address required"))])
-    
+
     recaptcha = RecaptchaField(_("Copy the words appearing below"))
 
     submit = SubmitField(_("Signup"))
@@ -38,8 +38,8 @@ class OpenIdLoginForm(Form):
     next = HiddenField()
 
     openid = TextField("OpenID", validators=[
-                       required(_("OpenID is required")), 
+                       required(_("OpenID is required")),
                        url(_("OpenID must be a valid URL"))])
 
     submit = SubmitField(_("Login"))
- 
+

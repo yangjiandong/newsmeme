@@ -5,7 +5,7 @@ from flask import Module, flash, request, g, current_app, \
 
 from flaskext.mail import Message
 from flaskext.babel import gettext as _
-from flaskext.principal import identity_changed, Identity, AnonymousIdentity
+from flask.ext.principal import identity_changed, Identity, AnonymousIdentity
 
 from newsmeme.forms import ChangePasswordForm, EditAccountForm, \
     DeleteAccountForm, LoginForm, SignupForm, RecoverPasswordForm
@@ -32,7 +32,7 @@ def login():
 
         if user and authenticated:
             session.permanent = form.remember.data
-            
+
             identity_changed.send(current_app._get_current_object(),
                                   identity=Identity(user.id))
 
@@ -41,7 +41,7 @@ def login():
             if openid:
                 user.openid = openid
                 db.session.commit()
-                
+
                 flash(_("Your OpenID has been attached to your account. "
                       "You can now sign in with your OpenID."), "success")
 
@@ -68,7 +68,7 @@ def signup():
     form = SignupForm(next=request.args.get("next"))
 
     if form.validate_on_submit():
-        
+
         user = User()
         form.populate_obj(user)
 
@@ -108,11 +108,11 @@ def forgot_password():
     if form.validate_on_submit():
 
         user = User.query.filter_by(email=form.email.data).first()
-        
+
         if user:
             flash(_("Please see your email for instructions on "
                   "how to access your account"), "success")
-            
+
             user.activation_key = str(uuid.uuid4())
             db.session.commit()
 
@@ -124,7 +124,7 @@ def forgot_password():
                               recipients=[user.email])
 
             mail.send(message)
-            
+
             return redirect(url_for("frontend.index"))
 
         else:
@@ -145,7 +145,7 @@ def change_password():
     elif 'activation_key' in request.values:
         user = User.query.filter_by(
             activation_key=request.values['activation_key']).first()
-    
+
     if user is None:
         abort(403)
 
@@ -164,12 +164,12 @@ def change_password():
         return redirect(url_for("account.login"))
 
     return render_template("account/change_password.html", form=form)
-        
+
 
 @account.route("/edit/", methods=("GET", "POST"))
 @auth.require(401)
 def edit():
-    
+
     form = EditAccountForm(g.user)
 
     if form.validate_on_submit():
@@ -195,7 +195,7 @@ def delete():
 
         db.session.delete(g.user)
         db.session.commit()
-    
+
         identity_changed.send(current_app._get_current_object(),
                               identity=AnonymousIdentity())
 
@@ -209,7 +209,7 @@ def delete():
 @account.route("/follow/<int:user_id>/", methods=("POST",))
 @auth.require(401)
 def follow(user_id):
-    
+
     user = User.query.get_or_404(user_id)
     g.user.follow(user)
     db.session.commit()
@@ -228,7 +228,7 @@ def follow(user_id):
 @account.route("/unfollow/<int:user_id>/", methods=("POST",))
 @auth.require(401)
 def unfollow(user_id):
-    
+
     user = User.query.get_or_404(user_id)
     g.user.unfollow(user)
     db.session.commit()

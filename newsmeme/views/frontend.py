@@ -1,11 +1,11 @@
 from flask import Module, url_for, \
     redirect, g, flash, request, current_app
 
-from flaskext.mail import Message
+# from flaskext.mail import Message
 from flaskext.babel import gettext as _
 
 from newsmeme.models import Post, Tag
-from newsmeme.extensions import mail, db
+# from newsmeme.extensions import mail, db
 from newsmeme.helpers import render_template, cached
 from newsmeme.forms import PostForm, ContactForm
 from newsmeme.decorators import keep_login_url
@@ -18,14 +18,14 @@ frontend = Module(__name__)
 @cached()
 @keep_login_url
 def index(page=1):
-    
+
     page_obj = Post.query.popular().hottest().restricted(g.user).as_list().\
                           paginate(page, per_page=Post.PER_PAGE)
-        
+
     page_url = lambda page: url_for("frontend.index", page=page)
 
-    return render_template("index.html", 
-                           page_obj=page_obj, 
+    return render_template("index.html",
+                           page_obj=page_obj,
                            page_url=page_url)
 
 
@@ -34,14 +34,14 @@ def index(page=1):
 @cached()
 @keep_login_url
 def latest(page=1):
-    
+
     page_obj = Post.query.popular().restricted(g.user).as_list().\
                           paginate(page, per_page=Post.PER_PAGE)
 
     page_url = lambda page: url_for("frontend.latest", page=page)
 
-    return render_template("latest.html", 
-                           page_obj=page_obj, 
+    return render_template("latest.html",
+                           page_obj=page_obj,
                            page_url=page_url)
 
 
@@ -56,8 +56,8 @@ def deadpool(page=1):
 
     page_url = lambda page: url_for("frontend.deadpool", page=page)
 
-    return render_template("deadpool.html", 
-                           page_obj=page_obj, 
+    return render_template("deadpool.html",
+                           page_obj=page_obj,
                            page_url=page_url)
 
 
@@ -66,7 +66,7 @@ def deadpool(page=1):
 def submit():
 
     form = PostForm()
-    
+
     if form.validate_on_submit():
 
         post = Post(author=g.user)
@@ -99,8 +99,8 @@ def search(page=1):
 
         post = page_obj.items[0]
         return redirect(post.url)
-    
-    page_url = lambda page: url_for('frontend.search', 
+
+    page_url = lambda page: url_for('frontend.search',
                                     page=page,
                                     keywords=keywords)
 
@@ -126,7 +126,7 @@ def contact():
 
         admins = current_app.config.get('ADMINS', [])
 
-        from_address = "%s <%s>" % (form.name.data, 
+        from_address = "%s <%s>" % (form.name.data,
                                     form.email.data)
 
         if admins:
@@ -136,7 +136,7 @@ def contact():
                               sender=from_address)
 
             mail.send(message)
-        
+
         flash(_("Thanks, your message has been sent to us"), "success")
 
         return redirect(url_for('frontend.index'))
@@ -166,11 +166,11 @@ def tag(slug, page=1):
                                     slug=slug,
                                     page=page)
 
-    return render_template("tag.html", 
+    return render_template("tag.html",
                            tag=tag,
                            page_url=page_url,
                            page_obj=page_obj)
-    
+
 
 @frontend.route("/help/")
 @keep_login_url

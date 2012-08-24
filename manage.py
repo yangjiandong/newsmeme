@@ -52,7 +52,7 @@ def createuser(username=None, password=None, email=None, role=None):
     """
     Create a new user
     """
-    
+
     if username is None:
         while True:
             username = prompt("Username")
@@ -80,7 +80,7 @@ def createuser(username=None, password=None, email=None, role=None):
                 print "Passwords do not match"
             else:
                 break
-    
+
     roles = (
         (User.MEMBER, "member"),
         (User.MODERATOR, "moderator"),
@@ -104,20 +104,20 @@ def createuser(username=None, password=None, email=None, role=None):
 @manager.command
 def createall():
     "Creates database tables"
-    
+
     db.create_all()
 
 @manager.command
 def dropall():
     "Drops all database tables"
-    
+
     if prompt_bool("Are you sure ? You will lose all your data !"):
         db.drop_all()
 
 @manager.command
 def mailall():
     "Sends an email to all users"
-    
+
     subject = prompt("Subject")
     message = prompt("Message")
     from_address = prompt("From", default="support@thenewsmeme.com")
@@ -134,7 +134,7 @@ def mailall():
 
 @manager.shell
 def make_shell_context():
-    return dict(app=current_app, 
+    return dict(app=current_app,
                 db=db,
                 Post=Post,
                 User=User,

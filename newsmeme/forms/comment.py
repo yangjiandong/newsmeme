@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flaskext.wtf import Form, TextAreaField, SubmitField, required
+from flask.ext.wtf import Form, TextAreaField, SubmitField, required
 from flaskext.babel import lazy_gettext as _
 
 class CommentForm(Form):
@@ -10,7 +10,7 @@ class CommentForm(Form):
     submit = SubmitField(_("Save"))
     cancel = SubmitField(_("Cancel"))
 
-   
+
 class CommentAbuseForm(Form):
 
     complaint = TextAreaField("Complaint", validators=[

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from flaskext.wtf import Form, TextField, TextAreaField, RadioField, \
+from flask.ext.wtf import Form, TextField, TextAreaField, RadioField, \
         SubmitField, ValidationError, optional, required, url
-       
+
 from flaskext.babel import gettext, lazy_gettext as _
 
 from newsmeme.models import Post
@@ -20,8 +20,8 @@ class PostForm(Form):
 
     tags = TextField(_("Tags"))
 
-    access = RadioField(_("Who can see this post ?"), 
-                        default=Post.PUBLIC, 
+    access = RadioField(_("Who can see this post ?"),
+                        default=Post.PUBLIC,
                         coerce=int,
                         choices=((Post.PUBLIC, _("Everyone")),
                                  (Post.FRIENDS, _("Friends only")),

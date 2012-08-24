@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flaskext.wtf import Form, TextField, TextAreaField, SubmitField, \
+from flask.ext.wtf import Form, TextField, TextAreaField, SubmitField, \
         required, email
 
 from flaskext.babel import lazy_gettext as _

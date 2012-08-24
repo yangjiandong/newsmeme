@@ -1,0 +1,19 @@
+newsememe
+==========
+
+2012.08.24
+----------
+
+   1. create 
+
+--新建环境时使用--no-site-packages将不使用标准的site-packages：
+virtualenv --no-site-packages flask09
+
+pip2 install ipython
+pip2 install Flask
+cd newsmeme
+python setup.py develop
+python manage.py createall
+
+   --flask mail in win7
+   easy_install -N lamson chardet Flask-Mail

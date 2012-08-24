@@ -5,8 +5,8 @@ from datetime import datetime
 from werkzeug import generate_password_hash, check_password_hash, \
     cached_property
 
-from flaskext.sqlalchemy import BaseQuery
-from flaskext.principal import RoleNeed, UserNeed, Permission
+from flask.ext.sqlalchemy import BaseQuery
+from flask.ext.principal import RoleNeed, UserNeed, Permission
 
 from newsmeme.extensions import db
 from newsmeme.permissions import null
@@ -36,9 +36,9 @@ class UserQuery(BaseQuery):
         identity.user = user
 
         return user
- 
+
     def authenticate(self, login, password):
-        
+
         user = self.filter(db.or_(User.username==login,
                                   User.email==login)).first()
 
@@ -62,7 +62,7 @@ class UserQuery(BaseQuery):
 
 
 class User(db.Model):
-    
+
     __tablename__ = "users"
 
     query_class = UserQuery
@@ -121,7 +121,7 @@ class User(db.Model):
     def _set_password(self, password):
         self._password = generate_password_hash(password)
 
-    password = db.synonym("_password", 
+    password = db.synonym("_password",
                           descriptor=property(_get_password,
                                               _set_password))
 
@@ -136,7 +136,7 @@ class User(db.Model):
     def _set_openid(self, openid):
         self._openid = generate_password_hash(openid)
 
-    openid = db.synonym("_openid", 
+    openid = db.synonym("_openid",
                           descriptor=property(_get_openid,
                                               _set_openid))
 
@@ -182,7 +182,7 @@ class User(db.Model):
         return User.query.filter(User.id.in_(self.friends))
 
     def follow(self, user):
-        
+
         user.followers.add(self.id)
         self.following.add(user.id)
 
@@ -228,4 +228,4 @@ class User(db.Model):
         return "http://www.gravatar.com/avatar/%s.jpg?s=%d" % (
             self.gravatar, size)
 
- 
+

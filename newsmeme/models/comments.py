@@ -3,8 +3,8 @@ from datetime import datetime
 from werkzeug import cached_property
 
 from flask import Markup
-from flaskext.sqlalchemy import BaseQuery
-from flaskext.principal import Permission, UserNeed, Denial
+from flask.ext.sqlalchemy import BaseQuery
+from flask.ext.principal import Permission, UserNeed, Denial
 
 from newsmeme import signals
 from newsmeme.extensions import db
@@ -21,7 +21,7 @@ class CommentQuery(BaseQuery):
 
         if user and user.is_moderator:
             return self
-       
+
         q = self.join(Post)
         criteria = [Post.access==Post.PUBLIC]
 
@@ -30,10 +30,10 @@ class CommentQuery(BaseQuery):
             if user.friends:
                 criteria.append(db.and_(Post.access==Post.FRIENDS,
                                         Post.author_id.in_(user.friends)))
-        
+
         return q.filter(reduce(db.or_, criteria))
 
-   
+
 class Comment(db.Model):
 
     __tablename__ = "comments"
@@ -43,16 +43,16 @@ class Comment(db.Model):
     query_class = CommentQuery
 
     id = db.Column(db.Integer, primary_key=True)
-    
-    author_id = db.Column(db.Integer, 
-                          db.ForeignKey(User.id, ondelete='CASCADE'), 
+
+    author_id = db.Column(db.Integer,
+                          db.ForeignKey(User.id, ondelete='CASCADE'),
                           nullable=False)
 
-    post_id = db.Column(db.Integer, 
-                        db.ForeignKey(Post.id, ondelete='CASCADE'), 
+    post_id = db.Column(db.Integer,
+                        db.ForeignKey(Post.id, ondelete='CASCADE'),
                         nullable=False)
 
-    parent_id = db.Column(db.Integer, 
+    parent_id = db.Column(db.Integer,
                           db.ForeignKey("comments.id", ondelete='CASCADE'))
 
     comment = db.Column(db.UnicodeText)
@@ -67,7 +67,7 @@ class Comment(db.Model):
     parent = db.relation('Comment', remote_side=[id])
 
     __mapper_args__ = {'order_by' : id.asc()}
-    
+
     class Permissions(Permissions):
 
 
@@ -91,7 +91,7 @@ class Comment(db.Model):
 
             return auth & Denial(*needs)
 
-   
+
     def __init__(self, *args, **kwargs):
         super(Comment, self).__init__(*args, **kwargs)
         self.votes = self.votes or set()
@@ -123,7 +123,7 @@ class Comment(db.Model):
 def update_num_comments(sender):
     sender.num_comments = \
         Comment.query.filter(Comment.post_id==sender.id).count()
-    
+
     db.session.commit()
 
 

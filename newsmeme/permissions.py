@@ -1,4 +1,4 @@
-from flaskext.principal import RoleNeed, Permission
+from flask.ext.principal import RoleNeed, Permission
 
 admin = Permission(RoleNeed('admin'))
 moderator = Permission(RoleNeed('moderator'))
