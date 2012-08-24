@@ -18,7 +18,7 @@ from datetime import datetime
 from flask import current_app, g
 
 from flaskext.babel import gettext, ngettext
-from flaskext.themes import static_file_url, render_theme_template 
+from flaskext.themes import static_file_url, render_theme_template
 
 from newsmeme.extensions import cache
 
@@ -46,6 +46,12 @@ def get_theme():
 
 
 def render_template(template, **context):
+    import logging
+    file_handler = logging.FileHandler('app.log')
+    current_app.logger.addHandler(file_handler)
+    current_app.logger.setLevel(logging.INFO)
+    current_app.logger.info('current theme:%s' % get_theme())
+    current_app.logger.info('template:%s' % template)
     return render_theme_template(get_theme(), template, **context)
 
 
@@ -54,13 +60,13 @@ def timesince(dt, default=None):
     Returns string representing "time since" e.g.
     3 days ago, 5 hours ago etc.
     """
-    
+
     if default is None:
         default = gettext("just now")
 
     now = datetime.utcnow()
     diff = now - dt
-    
+
     periods = (
         (diff.days / 365, "year", "years"),
         (diff.days / 30, "month", "months"),
@@ -72,7 +78,7 @@ def timesince(dt, default=None):
     )
 
     for period, singular, plural in periods:
-        
+
         if not period:
             continue
 
