@@ -17,3 +17,8 @@ python manage.py createall
 
    --flask mail in win7
    easy_install -N lamson chardet Flask-Mail
+
+   2. 0.9下使用themes有问题，合并themes文件夹到templates
+
+
+   --END

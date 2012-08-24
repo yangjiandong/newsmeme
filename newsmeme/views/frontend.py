@@ -5,7 +5,7 @@ from flask import Module, url_for, \
 from flaskext.babel import gettext as _
 
 from newsmeme.models import Post, Tag
-# from newsmeme.extensions import mail, db
+from newsmeme.extensions import mail, db
 from newsmeme.helpers import render_template, cached
 from newsmeme.forms import PostForm, ContactForm
 from newsmeme.decorators import keep_login_url

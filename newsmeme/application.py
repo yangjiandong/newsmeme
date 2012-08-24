@@ -50,7 +50,7 @@ def create_app(config=None, app_name=None, modules=None):
     if modules is None:
         modules = DEFAULT_MODULES
 
-    app = Flask(app_name)
+    app = Flask(app_name,  template_folder='templates')
 
     configure_app(app, config)
 
