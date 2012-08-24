@@ -27,7 +27,7 @@ setup(
     zip_safe=False,
     platforms='any',
     install_requires=[
-        'Flask',
+        'Flask==0.7',
         'Flask-Cache',
         'Flask-SQLAlchemy',
         'Flask-Principal',
