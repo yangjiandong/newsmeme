@@ -27,13 +27,16 @@ setup(
     zip_safe=False,
     platforms='any',
     install_requires=[
+        # 0.9
         'Flask',
         'Flask-Cache',
         'Flask-SQLAlchemy',
         'Flask-Principal',
         'Flask-WTF',
+        # 0.6.1
         # 'Flask-Mail',
         'Flask-Testing',
+        # 0.3.3
         'Flask-Script',
         'Flask-OpenID',
         'Flask-Babel',
