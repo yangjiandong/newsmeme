@@ -1,6 +1,13 @@
 newsememe
 ==========
 
+2012.10.07
+----------
+
+    1. 增加debug tool
+    https://github.com/mgood/flask-debugtoolbar
+    pip install flask-debugtoolbar
+
 2012.09.06
 ----------
 
@@ -11,7 +18,7 @@ newsememe
 2012.08.24
 ----------
 
-   1. create 
+   1. create
 
 --新建环境时使用--no-site-packages将不使用标准的site-packages：
 virtualenv --no-site-packages flask09

@@ -22,10 +22,11 @@ from flask.ext.principal import Principal, identity_loaded
 
 from newsmeme import helpers
 from newsmeme import views
-from newsmeme.config import DefaultConfig
+from newsmeme.config import DefaultConfig, DevConfig
 from newsmeme.models import User, Tag
 from newsmeme.helpers import render_template
 from newsmeme.extensions import db, mail, oid, cache
+from flask_debugtoolbar import DebugToolbarExtension
 
 __all__ = ["create_app"]
 
@@ -53,6 +54,8 @@ def create_app(config=None, app_name=None, modules=None):
     app = Flask(app_name,  template_folder='templates')
 
     configure_app(app, config)
+
+    toolbar = DebugToolbarExtension(app)
 
     configure_logging(app)
     configure_errorhandlers(app)
