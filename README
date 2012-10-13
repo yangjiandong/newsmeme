@@ -1,6 +1,15 @@
 newsememe
 ==========
 
+2012.10.13
+----------
+
+    1. virtualenv 在 ubuntu 下使用
+    virtualenv --no-site-packages flask09
+    source flask09/bin/activate
+    ...
+    deactivate
+
 2012.10.07
 ----------
 
