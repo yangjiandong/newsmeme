@@ -10,6 +10,9 @@ newsememe
     ...
     deactivate
 
+    2. create requirements
+    pip freeze > stable-req.txt 
+
 2012.10.07
 ----------
 
