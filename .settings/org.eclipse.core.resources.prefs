@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//newsmeme/application.py=utf-8
 encoding//newsmeme/config.py=utf-8
+encoding//newsmeme/forms/account.py=utf-8
 encoding//newsmeme/helpers.py=utf-8
+encoding//newsmeme/models/__init__.py=utf-8
 encoding/manage.py=utf-8
 encoding/setup.py=utf-8

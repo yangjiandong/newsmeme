@@ -1,6 +1,17 @@
 newsememe
 ==========
 
+2012.10.14
+----------
+
+    1. vagrant config
+    config.vm.network :hostonly, "192.168.33.10"
+    本地可通过http://192.168.33.10 访问
+    
+    2. flask
+    python manage.py runserver -t 0.0.0.0 -p 5000
+    本地可通过http://192.168.33.10:5000 访问
+    
 2012.10.13
 ----------
 
@@ -11,8 +22,8 @@ newsememe
     deactivate
 
     2. create requirements
-    pip freeze > stable-req.txt 
-
+    pip freeze > stable-req.txt   
+    
 2012.10.07
 ----------
 

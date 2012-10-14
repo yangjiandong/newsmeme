@@ -26,7 +26,7 @@ setup(
     packages=['newsmeme'],
     zip_safe=False,
     platforms='any',
-    install_requires=[
+    install_requires=[    
         # 0.9
         'Flask==0.9',
         'Flask-Cache==0.6.0',
@@ -34,18 +34,19 @@ setup(
         'Flask-Principal==0.3.1',
         'Flask-WTF==0.8',
         # 0.6.1
-        # 'Flask-Mail',
+        'Flask-Mail == 0.6.1',
         'Flask-Testing',
         # 0.3.3
         'Flask-Script==0.3.3',
         'Flask-OpenID==1.0.1',
         'Flask-Babel==0.8',
-        'Flask-Themes == 0.1.3.1',
+        'Flask-Themes',
         'sqlalchemy == 0.7.8',
         'markdown == 2.2.0',
         'feedparser == 5.1.2',
         'blinker == 1.2',
         'nose== 1.1.2',
+        'Flask-DebugToolbar==0.7.1',        
     ],
     include_package_data=True,
     classifiers=[
