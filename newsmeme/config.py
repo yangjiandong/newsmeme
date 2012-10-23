@@ -92,6 +92,7 @@ class TestConfig(object):
     SQLALCHEMY_DATABASE_URI = "sqlite://"
     SQLALCHEMY_ECHO = False
 
-
+class DevMySqlConfig(DefaultConfig):
+    SQLALCHEMY_DATABASE_URI = "sqlite:///newsmeme.db"
 
 

@@ -70,8 +70,9 @@ def create_app(config=None, app_name=None, modules=None):
 
 
 def configure_app(app, config):
-
-    app.config.from_object(DefaultConfig())
+    import newsmeme
+    #app.config.from_object(DefaultConfig())
+    app.config.from_object(newsmeme.config.DevMySqlConfig())
 
     if config is not None:
         app.config.from_object(config)
