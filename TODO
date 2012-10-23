@@ -1,0 +1,9 @@
+TODO
+====
+
+    1. html UnicodeDecodeError: 'ascii' codec can't decode byte
+
+    post.py 直接使用中文,submit.html渲染报以上错
+
+    解决,u"中文"
+

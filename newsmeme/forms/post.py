@@ -9,8 +9,10 @@ from newsmeme.extensions import db
 
 class PostForm(Form):
 
-    title = TextField(_("Title of your post"), validators=[
-                      required(message=_("Title required"))])
+    #title = TextField(_("Title of your post"), validators=[
+    #                  required(message=_("Title required"))])
+    title = TextField(u"发表标题", validators=[
+                      required(message=u"必须有标题")])
 
     link = TextField(_("Link"), validators=[
                      optional(),
