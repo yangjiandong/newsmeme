@@ -14,43 +14,43 @@ class LoginForm(Form):
 
     next = HiddenField()
 
-    remember = BooleanField(_("Remember me"))
+    remember = BooleanField(u"保存登录信息")
 
-    login = TextField(_("Username or email address"), validators=[
+    login = TextField(u"用户名或邮箱", validators=[
                       required(message=\
-                               _("You must provide an email or username"))])
+                               u"必须提供用户名或密码")])
 
-    password = PasswordField(_("Password"))
+    password = PasswordField(u"密码")
 
-    submit = SubmitField(_("Login"))
+    submit = SubmitField(u"登录")
 
 class SignupForm(Form):
 
     next = HiddenField()
 
-    username = TextField(_("Username"), validators=[
+    username = TextField(u"用户名", validators=[
                          required(message=_("Username required")),
                          is_username])
 
-    password = PasswordField(_("Password"), validators=[
+    password = PasswordField(u"密码", validators=[
                              required(message=_("Password required"))])
 
-    password_again = PasswordField(_("Password again"), validators=[
+    password_again = PasswordField(u"密码确认", validators=[
                                    equal_to("password", message=\
                                             _("Passwords don't match"))])
 
-    email = TextField(_("Email address"), validators=[
+    email = TextField(u"邮箱", validators=[
                       required(message=_("Email address required")),
                       email(message=_("A valid email address is required"))])
 
     recaptcha = RecaptchaField(_("Copy the words appearing below"))
 
-    submit = SubmitField(_("Signup"))
+    submit = SubmitField(u"注册")
 
     def validate_username(self, field):
         user = User.query.filter(User.username.like(field.data)).first()
         if user:
-            raise ValidationError, gettext("This username is taken")
+            raise ValidationError, u"改用户名已存在"
 
     def validate_email(self, field):
         user = User.query.filter(User.email.like(field.data)).first()
@@ -60,10 +60,10 @@ class SignupForm(Form):
 
 class EditAccountForm(Form):
 
-    username = TextField("Username", validators=[
+    username = TextField(u"用户名", validators=[
                          required(_("Username is required")), is_username])
 
-    email = TextField(_("Your email address"), validators=[
+    email = TextField(u"邮箱", validators=[
                       required(message=_("Email address required")),
                       email(message=_("A valid email address is required"))])
 
@@ -73,7 +73,7 @@ class EditAccountForm(Form):
                                   "to your post or comment"))
 
 
-    submit = SubmitField(_("Save"))
+    submit = SubmitField(u"保存")
 
     def __init__(self, user, *args, **kwargs):
         self.user = user

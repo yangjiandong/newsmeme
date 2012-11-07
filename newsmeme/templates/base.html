@@ -29,10 +29,10 @@
         <ul class="topnav span-12 last">
             {% if g.user %}
             <li><a href="{{ url_for("user.posts", username=g.user.username) }}">{{ g.user.username }}</a> ({{ g.user.karma }})</li>
-            <li><a href="{{ url_for('account.logout') }}">{{ _('logout') }}</a></li>
+            <li><a href="{{ url_for('account.logout') }}">{{ '注销' }}</a></li>
             {% else %}
-            <li><a href="{{ url_for('account.login', next=request.url if g.keep_login_url else None) }}">{{ _('login') }}</a></li>
-            <li><a href="{{ url_for('account.signup', next=request.url if g.keep_login_url else None) }}">{{ _('signup') }}</a></li>
+            <li><a href="{{ url_for('account.login', next=request.url if g.keep_login_url else None) }}">{{ '登录' }}</a></li>
+            <li><a href="{{ url_for('account.signup', next=request.url if g.keep_login_url else None) }}">{{ '注册' }}</a></li>
         {% endif %}
         <li><a href="{{ url_for('frontend.contact') }}">{{ _('contact us') }}</a>  </li>
         <li><a href="{{ url_for('frontend.rules') }}">{{ _('rules') }}</a> </li>

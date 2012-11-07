@@ -5,11 +5,11 @@
 
 {% block content %}
 
-<h2>{{ _('Login to newsmeme') }}</h2>
+<h2>{{ 'Login to newsmeme' }}</h2>
 
 <p>
 {% trans openid_url=url_for('openid.login', next=form.next.data) %}
-Login with <a href="{{ openid_url }}">OpenID</a>
+以 <a href="{{ openid_url }}">OpenID</a> 身份登录
 {% endtrans %}
 </p>
 
@@ -19,13 +19,13 @@ Login with <a href="{{ openid_url }}">OpenID</a>
     <ul>
         <li>
             {{ render_errors(form.login) }}
-            {{ form.login.label }} 
+            {{ form.login.label }}
             {{ form.login(size=15) }}
         </li>
 
         <li>
             {{ render_errors(form.password) }}
-            {{ form.password.label }} 
+            {{ form.password.label }}
             {{ form.password(size=15) }}
         </li>
         <li>
@@ -38,10 +38,10 @@ Login with <a href="{{ openid_url }}">OpenID</a>
     </ul>
 </form>
 <p>
-<a href="{{ url_for('account.signup', next=form.next.data) }}">{{ _('Not a member yet ? Sign up to newsmeme !') }}</a>
+<a href="{{ url_for('account.signup', next=form.next.data) }}">{{ 'Not a member yet ? Sign up to newsmeme !' }}</a>
 </p>
 <p>
-<a href="{{ url_for('account.forgot_password') }}">{{ _('Forgot your password ?') }}</a>
+<a href="{{ url_for('account.forgot_password') }}">{{ '忘记密码?' }}</a>
 </p>
 
 {% endblock %}
